@@ -5,466 +5,233 @@
   <title>Giovanna Prezia | Bioinformatics & Data Analytics</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <!-- Ícones (necessário p/ lua e sol) -->
+  <script src="https://kit.fontawesome.com/a2d9d5a64e.js" crossorigin="anonymous"></script>
 
-  <!-- Font Awesome para ícones sociais -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdSmfPhi54mcwXW0thLqZ9UqR0t7nV+u3t5a5gNZ1x3CnVZkO1T12JmTt8wO1YpBbRghPp3Kxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Fonte Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
+    /* ---------- CORES DO TEMA ---------- */
     :root {
-      --bg: #f5f5f7;
+      --bg: #f4f4f4;
       --card: #ffffff;
-      --text: #161616;
-      --muted: #6c6f7a;
-      --accent: #e6735c; /* cor de destaque (pode trocar) */
-      --border-soft: #e3e3ea;
+      --accent: #1de9b6;
+      --text: #222;
+      --muted: #666;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    /* DARK MODE */
+    body.dark {
+      --bg: #0d0f14;
+      --card: #151821;
+      --text: #f0f2f5;
+      --muted: #9ea4b3;
+      --accent: #1de9b6;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    /* ---------- ESTILOS GERAIS ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #fdfdfd 0, #ececf2 50%, #e0e2ea 100%);
+      font-family: "Inter", system-ui;
+      background: var(--bg);
       color: var(--text);
+      line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { opacity: 0.8; }
 
-    /* NAVBAR */
-
+    /* ---------- NAVBAR ---------- */
     header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(16px);
-      background: rgba(245,245,247,0.86);
-      border-bottom: 1px solid rgba(0,0,0,0.03);
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.8);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: background 0.4s ease;
+    }
+
+    body.dark header {
+      background: rgba(0,0,0,0.4);
+      border-color: rgba(255,255,255,0.05);
     }
 
     .nav {
       max-width: 1100px;
-      margin: 0 auto;
-      padding: 0.9rem 1.5rem;
+      margin: auto;
+      padding: 1rem 1.5rem;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .nav-left {
-      display: flex;
       align-items: center;
-      gap: 0.6rem;
-    }
-
-    .nav-logo-circle {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: #000;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      font-weight: 600;
     }
 
     .nav-left span {
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      font-size: 0.8rem;
-      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
     }
 
     .nav-right a {
-      margin-left: 1.6rem;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      position: relative;
-    }
-
-    .nav-right a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -0.2rem;
-      width: 0;
-      height: 2px;
-      background: #000;
-      transition: width 0.2s ease;
+      margin-left: 1.2rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      color: var(--text);
     }
 
     .nav-right a:hover {
-      color: #000;
+      color: var(--accent);
     }
 
-    .nav-right a:hover::after {
-      width: 100%;
+    /* BOTÃO DARK MODE */
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      margin-left: 1.5rem;
+      color: var(--text);
+      transition: color 0.3s ease;
     }
 
-    @media (max-width: 768px) {
-      .nav-right {
-        display: none;
-      }
+    .theme-toggle:hover {
+      color: var(--accent);
     }
 
-    /* CONTAINER GERAL */
-
+    /* ---------- HERO ---------- */
     main {
       max-width: 1100px;
-      margin: 0 auto;
-      padding: 2.2rem 1.5rem 3rem;
+      margin: auto;
+      padding: 2.5rem 1.5rem;
     }
 
-    /* HERO */
-
     .hero {
-      background: var(--card);
-      border-radius: 24px;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-      padding: 2.5rem 2.2rem;
       display: flex;
-      gap: 2.4rem;
+      flex-wrap: wrap;
+      gap: 3rem;
       align-items: center;
       margin-bottom: 3rem;
-      border: 1px solid var(--border-soft);
     }
 
     .hero-text {
-      flex: 1 1 260px;
+      flex: 1 1 300px;
     }
 
-    .hero-title {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2.2rem, 3.2vw, 2.8rem);
+    .hero-text h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
       margin-bottom: 0.4rem;
     }
 
-    .hero-subtitle {
-      font-size: 0.95rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+    .hero-text h2 {
+      font-size: 1.15rem;
+      font-weight: 400;
       color: var(--muted);
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-highlight {
-      display: inline-block;
-      background: #000;
-      color: #fff;
-      padding: 0.26rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      margin-bottom: 0.7rem;
-    }
-
-    .hero-text p {
-      color: var(--muted);
-      max-width: 30rem;
-      margin-bottom: 0.9rem;
-      font-size: 0.95rem;
-    }
-
-    .hero-actions {
-      margin-top: 1.3rem;
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary,
-    .btn-ghost {
-      border-radius: 999px;
-      padding: 0.6rem 1.2rem;
-      font-size: 0.85rem;
-      border: 1px solid #000;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .btn-primary {
-      background: #000;
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: #222;
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: #000;
-    }
-
-    .btn-ghost:hover {
-      background: #f1f1f4;
-    }
-
-    .hero-photo-wrapper {
-      flex: 0 0 260px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .hero-photo-frame {
-      position: relative;
-      width: 260px;
-      height: 320px;
-      background: #000;
-      border-radius: 18px;
-      padding: 8px;
-    }
-
-    .hero-photo {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 2px solid #fff;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
-    }
-
-    .hero-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-social {
-      position: absolute;
-      right: -52px;
-      top: 20%;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .hero-social a {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: #f1f1f4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-      font-size: 0.9rem;
-    }
-
-    .hero-social a:hover {
-      background: #000;
-      color: #fff;
-    }
-
-    @media (max-width: 880px) {
-      .hero {
-        flex-direction: column-reverse;
-        padding: 2rem 1.6rem;
-      }
-      .hero-photo-wrapper {
-        flex: none;
-      }
-      .hero-photo-frame {
-        width: 220px;
-        height: 280px;
-      }
-      .hero-social {
-        right: -44px;
-      }
-    }
-
-    /* SEÇÕES GERAIS */
-
-    section.block {
-      background: var(--card);
-      border-radius: 22px;
-      padding: 2rem 2.1rem;
-      margin-bottom: 2rem;
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.04);
-    }
-
-    .block-label {
-      font-size: 0.8rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .block-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.4rem;
       margin-bottom: 1rem;
     }
 
-    .block p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 48rem;
+    .hero-tags {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
     }
 
-    /* EXPERIÊNCIA */
-
-    .timeline {
-      margin-top: 1.2rem;
-      border-left: 1px solid #ddd;
-      padding-left: 1.3rem;
-    }
-
-    .timeline-item {
-      margin-bottom: 1.4rem;
-      position: relative;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -1.55rem;
-      top: 0.35rem;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #000;
-    }
-
-    .timeline-role {
-      font-weight: 500;
-      margin-bottom: 0.1rem;
-    }
-
-    .timeline-place {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-desc {
-      font-size: 0.9rem;
+    .tag {
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 0.2rem 0.75rem;
+      font-size: 0.8rem;
       color: var(--muted);
     }
 
-    /* PROJETOS */
-
-    .cards {
-      margin-top: 1.4rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
+    body.dark .tag {
+      border-color: rgba(255,255,255,0.15);
+      color: var(--muted);
     }
 
-    .card {
+    /* FOTO */
+    .photo-card {
+      width: 240px;
+      height: 240px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: #111;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      transition: border 0.4s ease;
+    }
+
+    body.dark .photo-card {
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ---------- SEÇÕES ---------- */
+    section {
+      margin-bottom: 3rem;
+      padding: 1.8rem;
+      background: var(--card);
       border-radius: 18px;
-      border: 1px solid var(--border-soft);
-      padding: 1rem 1.1rem;
-      background: #fafafa;
+      border: 1px solid rgba(0,0,0,0.08);
+      transition: background 0.4s ease, border-color 0.4s ease;
     }
 
-    .card-title {
-      font-weight: 500;
-      margin-bottom: 0.3rem;
+    body.dark section {
+      border-color: rgba(255,255,255,0.08);
     }
 
-    .card-tag {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    /* PUBLICAÇÕES */
-
-    .pub-list {
-      margin-top: 1rem;
-    }
-
-    .pub-item {
-      margin-bottom: 0.7rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .pub-item span {
-      font-weight: 500;
-      color: #222;
-    }
-
-    /* CONTATO */
-
-    .contact-grid {
-      margin-top: 1.2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-
-    .contact-item {
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .contact-label {
-      font-size: 0.8rem;
+    section h3 {
+      font-size: 1rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    section h4 {
+      margin-top: 0.6rem;
+      color: var(--text);
+    }
+
+    .item-meta {
+      font-size: 0.85rem;
       color: var(--muted);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.5rem;
     }
 
-    footer {
-      text-align: center;
-      padding: 1.5rem 1rem 2rem;
-      font-size: 0.8rem;
-      color: var(--muted);
+    ul li {
+      margin-bottom: 0.4rem;
+      list-style: none;
     }
 
-    /* ANIMAÇÃO DE ENTRADA (estilo apresentação) */
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+    ul li::before {
+      content: "• ";
+      color: var(--accent);
     }
 
-    .reveal.show {
-      opacity: 1;
-      transform: translateY(0);
+    @media (max-width: 720px) {
+      .nav-right { display: none; }
+      .hero { flex-direction: column-reverse; }
     }
   </style>
 </head>
+
 <body>
 
+  <!-- ---------- NAV ---------- -->
   <header>
     <nav class="nav">
       <div class="nav-left">
-        <div class="nav-logo-circle">G</div>
-        <span>Giovanna Prezia</span>
+        <span>GIOVANNA PREZIA</span>
       </div>
+
       <div class="nav-right">
         <a href="#sobre">Home</a>
         <a href="#experiencia">Experiência</a>
@@ -472,209 +239,105 @@
         <a href="#publicacoes">Publicações</a>
         <a href="#contato">Contato</a>
       </div>
+
+      <!-- Botão modo escuro -->
+      <button id="theme-toggle" class="theme-toggle">
+        <i class="fa-solid fa-moon"></i>
+      </button>
     </nav>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero reveal" id="sobre">
+
+    <!-- ---------- HERO ---------- -->
+    <section class="hero" id="sobre">
       <div class="hero-text">
-        <div class="hero-highlight">Bioinformatics &amp; Data Analytics</div>
-        <h1 class="hero-title">Giovanna Prezia</h1>
-        <p class="hero-subtitle">CIÊNCIA • DADOS • NARRATIVAS CLARAS</p>
+        <h1>Giovanna Prezia</h1>
+        <h2>Bioinformatics & Data Analytics</h2>
+
         <p>
-          Trabalho com dados científicos e análise de dados aplicada à saúde e biotecnologia.
-          Uno bioinformática, ciência de dados e comunicação científica para transformar
-          resultados complexos em histórias visuais claras e úteis.
-        </p>
-        <p>
-          Busco oportunidades remotas, colaborações internacionais e projetos que conectem
-          dados, pesquisa e pessoas.
+          Transformo dados biológicos e científicos em análises claras,
+          visuais e úteis, integrando bioinformática e ciência de dados
+          para apoiar pesquisa, saúde e tecnologia.
         </p>
 
-        <div class="hero-actions">
-          <a href="#projetos" class="btn-primary">
-            Ver projetos
-            <i class="fa-solid fa-arrow-down"></i>
-          </a>
-          <a href="#contato" class="btn-ghost">
-            Falar comigo
-            <i class="fa-regular fa-envelope"></i>
-          </a>
+        <div class="hero-tags">
+          <span class="tag">Bioinformatics</span>
+          <span class="tag">Data Science</span>
+          <span class="tag">Scientific Analytics</span>
         </div>
       </div>
 
-      <div class="hero-photo-wrapper">
-        <div class="hero-photo-frame">
-          <div class="hero-photo">
-            <!-- TROQUE A URL DA FOTO POR UMA SUA (pode ser do GitHub, Imgur etc.) -->
-            <img src="https://via.placeholder.com/600x800.png?text=Sua+Foto" alt="Foto de Giovanna Prezia">
-          </div>
-
-          <div class="hero-social">
-            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/giovannaprezia/" target="_blank" aria-label="LinkedIn">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-            <a href="https://github.com/GiovannaPrezia" target="_blank" aria-label="GitHub">
-              <i class="fa-brands fa-github"></i>
-            </a>
-          </div>
-        </div>
+      <div class="photo-card">
+        <img src="https://via.placeholder.com/400x400.png?text=Sua+Foto" alt="Giovanna Prezia">
       </div>
     </section>
 
-    <!-- EXPERIÊNCIA -->
-    <section class="block reveal" id="experiencia">
-      <div class="block-label">Seção 01</div>
-      <h2 class="block-title">Experiência</h2>
-      <p>
-        Uma visão rápida das principais experiências que moldaram minha trajetória em
-        ciência, dados e colaboração internacional.
-      </p>
+    <!-- ---------- EXPERIÊNCIA ---------- -->
+    <section id="experiencia">
+      <h3>EXPERIÊNCIA</h3>
 
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-role">Bioinformatics &amp; Data Analytics Researcher</div>
-          <div class="timeline-place">Fiocruz – ICC Paraná • 2024 – presente</div>
-          <div class="timeline-desc">
-            Análise de dados, visualização, suporte a projetos científicos e desenvolvimento
-            de fluxos analíticos reprodutíveis.
-          </div>
-        </div>
+      <h4>Bioinformatics & Data Analytics Researcher</h4>
+      <div class="item-meta">Fiocruz – ICC Paraná • 2024 – presente</div>
 
-        <div class="timeline-item">
-          <div class="timeline-role">Visiting Researcher</div>
-          <div class="timeline-place">Institut Pasteur de Montevideo • 2024</div>
-          <div class="timeline-desc">
-            Colaboração internacional em projetos envolvendo dados, enriquecimento de
-            experimentos e interpretação de resultados.
-          </div>
-        </div>
+      <h4>Visiting Researcher</h4>
+      <div class="item-meta">Institut Pasteur de Montevideo • 2024</div>
 
-        <div class="timeline-item">
-          <div class="timeline-role">Biomedical Scientist / MSc Biotechnology</div>
-          <div class="timeline-place">Instituto de Pesquisa Pelé Pequeno Príncipe • 2020 – 2024</div>
-          <div class="timeline-desc">
-            Pesquisa translacional, análises de expressão gênica e participação ativa em
-            congressos e produções científicas.
-          </div>
-        </div>
-      </div>
+      <h4>Biomedical Scientist / MSc Biotechnology</h4>
+      <div class="item-meta">Pelé Pequeno Príncipe Institute • 2020 – 2024</div>
     </section>
 
-    <!-- PROJETOS -->
-    <section class="block reveal" id="projetos">
-      <div class="block-label">Seção 02</div>
-      <h2 class="block-title">Projetos &amp; Trabalhos</h2>
-      <p>
-        Alguns exemplos de trabalhos que conectam ciência, dados e comunicação —
-        desde análises técnicas até conteúdos educacionais.
-      </p>
-
-      <div class="cards">
-        <div class="card">
-          <div class="card-tag">Análise de dados</div>
-          <div class="card-title">Exploração de dados em saúde</div>
-          <p>
-            Projeto de análise exploratória e visualização de dados biomédicos,
-            focado em entender padrões e destacar insights principais.
-          </p>
-        </div>
-        <div class="card">
-          <div class="card-tag">Visualização</div>
-          <div class="card-title">Painéis e narrativas visuais</div>
-          <p>
-            Criação de gráficos e painéis que traduzem resultados complexos em
-            histórias visuais claras para equipes científicas e não técnicas.
-          </p>
-        </div>
-        <div class="card">
-          <div class="card-tag">Educação</div>
-          <div class="card-title">Conteúdo para iniciantes</div>
-          <p>
-            Material introdutório sobre bioinformática, ciência de dados e leitura
-            de resultados, pensado para estudantes da área da saúde.
-          </p>
-        </div>
-      </div>
+    <!-- ---------- PROJETOS ---------- -->
+    <section id="projetos">
+      <h3>PROJETOS</h3>
+      <ul>
+        <li>Pipeline para análise e visualização de dados biomédicos</li>
+        <li>Sistema de relatórios automáticos em ciência de dados</li>
+        <li>Conteúdos educacionais sobre bioinformática</li>
+      </ul>
     </section>
 
-    <!-- PUBLICAÇÕES -->
-    <section class="block reveal" id="publicacoes">
-      <div class="block-label">Seção 03</div>
-      <h2 class="block-title">Publicações &amp; Apresentações</h2>
-      <p>
-        Alguns trabalhos apresentados em congressos e produções científicas que
-        refletem minha atuação em pesquisa e comunicação de resultados.
-      </p>
-
-      <div class="pub-list">
-        <div class="pub-item">
-          <span>Título do trabalho 1</span> – Congresso / Evento, ano.
-        </div>
-        <div class="pub-item">
-          <span>Título do trabalho 2</span> – Congresso / Evento, ano.
-        </div>
-        <div class="pub-item">
-          <span>Artigo ou resumo científico</span> – Revista / Coletânea, ano.
-        </div>
-      </div>
+    <!-- ---------- PUBLICAÇÕES ---------- -->
+    <section id="publicacoes">
+      <h3>PUBLICAÇÕES & APRESENTAÇÕES</h3>
+      <ul>
+        <li>Adicione aqui suas apresentações e artigos</li>
+      </ul>
     </section>
 
-    <!-- CONTATO -->
-    <section class="block reveal" id="contato">
-      <div class="block-label">Seção 04</div>
-      <h2 class="block-title">Contato</h2>
-      <p>
-        Aberta a colaborações, consultorias pontuais, projetos educacionais e
-        oportunidades remotas em ciência, dados e saúde.
-      </p>
-
-      <div class="contact-grid">
-        <div class="contact-item">
-          <div class="contact-label">E-mail</div>
-          <a href="mailto:giovannaprezia.analytics@gmail.com">
-            giovannaprezia.analytics@gmail.com
-          </a>
-        </div>
-        <div class="contact-item">
-          <div class="contact-label">LinkedIn</div>
-          <a href="https://www.linkedin.com/in/giovannaprezia/" target="_blank">
-            linkedin.com/in/giovannaprezia
-          </a>
-        </div>
-        <div class="contact-item">
-          <div class="contact-label">GitHub</div>
-          <a href="https://github.com/GiovannaPrezia" target="_blank">
-            github.com/GiovannaPrezia
-          </a>
-        </div>
-      </div>
+    <!-- ---------- CONTATO ---------- -->
+    <section id="contato">
+      <h3>CONTATO</h3>
+      <p>Email: <a href="mailto:giovannaprezia.analytics@gmail.com">giovannaprezia.analytics@gmail.com</a></p>
+      <p><a href="https://www.linkedin.com/in/giovannaprezia/" target="_blank">LinkedIn</a></p>
+      <p><a href="https://github.com/GiovannaPrezia" target="_blank">GitHub</a></p>
     </section>
+
   </main>
 
-  <footer>
-    © <span id="year"></span> Giovanna Prezia — Bioinformatics &amp; Data Analytics
-  </footer>
-
+  <!-- ---------- SCRIPT DARK MODE ---------- -->
   <script>
-    // ano automático no rodapé
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const toggle = document.getElementById("theme-toggle");
+    const body = document.body;
 
-    // animação de entrada dos blocos (apresentação)
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.15 });
+    // carregar preferência salva
+    if (localStorage.getItem("theme") === "dark") {
+      body.classList.add("dark");
+      toggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
 
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+    toggle.addEventListener("click", () => {
+      body.classList.toggle("dark");
+
+      if (body.classList.contains("dark")) {
+        toggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        localStorage.setItem("theme", "dark");
+      } else {
+        toggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        localStorage.setItem("theme", "light");
+      }
+    });
   </script>
+
 </body>
 </html>
-
