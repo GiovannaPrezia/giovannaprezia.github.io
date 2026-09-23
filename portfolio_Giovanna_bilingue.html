@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Giovanna Prezia | Bioinformática, Ciência de Dados & Pesquisa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Favicon (laptop icon) -->
+  <link rel="icon" type="image/png" href="laptop.png?v=2" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
+
+  <style>
+
+    /* ------------------------------ */
+    /* THEMES: LIGHT & DARK */
+    /* ------------------------------ */
+
+    :root {
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --text: #161616;
+      --muted: #6c6f7a;
+      --accent: #e6735c;
+      --border-soft: #e3e3ea;
+    }
+
+    body.dark {
+      --bg: #0e0f12;
+      --card: #1a1c21;
+      --text: #f0f0f2;
+      --muted: #b1b4bf;
+      --accent: #ff8c72;
+      --border-soft: #2a2c33;
+      background: radial-gradient(circle at top, #16171b 0, #0e0f12 70%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system;
+      background: radial-gradient(circle at top, #fdfdfd 0, #ececf2 50%, #e0e2ea 100%);
+      color: var(--text);
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ------------------------------ */
+    /* NAVBAR */
+    /* ------------------------------ */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(245,245,247,0.86);
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+      transition: background 0.3s ease;
+    }
+
+    body.dark header {
+      background: rgba(0,0,0,0.45);
+      border-color: rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-logo-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .nav-left span {
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .nav-right a {
+      margin-left: 1.6rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      position: relative;
+    }
+
+    .nav-right a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      .nav-right {
+        display: none;
+      }
+    }
+
+    /* Language switcher */
+    .language-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-left: 0.8rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    .language-switcher button {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 500;
+      padding: 0.25rem 0.2rem;
+      transition: color 0.2s ease;
+    }
+
+    .language-switcher button:hover,
+    .language-switcher button.active {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .language-divider {
+      color: var(--border-soft);
+    }
+
+    /* Dark mode button */
+    #theme-toggle {
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      color: var(--text);
+      margin-left: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    #theme-toggle:hover {
+      color: var(--accent);
+    }
+
+    /* ------------------------------ */
+    /* MAIN BASE */
+    /* ------------------------------ */
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.2rem 1.5rem 3rem;
+    }
+
+    /* ------------------------------ */
+    /* HERO */
+    /* ------------------------------ */
+
+    .hero {
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+      padding: 2.5rem 2.2rem;
+      display: flex;
+      gap: 2.4rem;
+      align-items: center;
+      margin-bottom: 3rem;
+      border: 1px solid var(--border-soft);
+      transition: background 0.35s ease, border-color 0.35s ease;
+    }
+
+    body.dark .hero {
+      box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+    }
+
+    .hero-text {
+      flex: 1 1 260px;
+    }
+
+    .hero-highlight {
+      display: inline-block;
+      background: var(--text);
+      color: var(--card);
+      padding: 0.26rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.2rem, 3.2vw, 2.8rem);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      max-width: 30rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.95rem;
+    }
+
+    .hero-actions {
+      margin-top: 1.3rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+      border: 1px solid var(--text);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--card);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(0,0,0,0.05);
+    }
+
+    .hero-photo-wrapper {
+      flex: 0 0 260px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-photo-frame {
+      position: relative;
+      width: 260px;
+      height: 320px;
+      background: var(--text);
+      border-radius: 18px;
+      padding: 8px;
+      transition: background 0.35s ease;
+    }
+
+    .hero-photo {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid var(--card);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-social {
+      position: absolute;
+      right: -52px;
+      top: 20%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .hero-social a {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      font-size: 0.9rem;
+      transition: all 0.25s ease;
+    }
+
+    .hero-social a:hover {
+      background: var(--text);
+      color: var(--card);
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        flex-direction: column-reverse;
+        padding: 2rem 1.6rem;
+      }
+      .hero-photo-frame {
+        width: 220px;
+        height: 280px;
+      }
+      .hero-social {
+        right: -44px;
+      }
+    }
+
+    /* ------------------------------ */
+    /* GENERAL BLOCKS (Experience, etc.) */
+    /* ------------------------------ */
+
+    .block {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 2rem 1.8rem 2.3rem;
+      border: 1px solid var(--border-soft);
+      margin-bottom: 2.4rem;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+      transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.2s ease;
+    }
+
+    .block:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+    }
+
+    .block-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .block-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.7rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .block > p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 40rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .block {
+        padding: 1.6rem 1.3rem 1.9rem;
+      }
+    }
+
+    /* ------------------------------ */
+    /* EXPERIENCE – TIMELINE */
+    /* ------------------------------ */
+
+    .timeline {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 1.3rem;
+      border-left: 2px solid var(--border-soft);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: 0.25rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .timeline-role {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-place {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .timeline-desc-list {
+      margin: 0.55rem 0 0;
+      padding-left: 1.15rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .timeline-desc-list li {
+      margin-bottom: 0.45rem;
+      padding-left: 0.15rem;
+    }
+
+    .timeline-desc-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ------------------------------ */
+    /* PROJECTS – CARDS */
+    /* ------------------------------ */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      border-radius: 16px;
+      padding: 1.4rem 1.3rem;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, border-color 0.3s ease;
+    }
+
+    body.dark .card {
+      background: rgba(26,28,33,0.96);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 0.7rem;
+      color: var(--accent);
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ------------------------------ */
+    /* PUBLICATIONS */
+    /* ------------------------------ */
+
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    .pub-item {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 0.7rem 0.8rem;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.02);
+      border: 1px dashed var(--border-soft);
+    }
+
+    body.dark .pub-item {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .pub-item span {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ------------------------------ */
+    /* CONTACT */
+    /* ------------------------------ */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.3rem;
+      margin-top: 0.8rem;
+    }
+
+    .contact-item {
+      padding: 1rem 0.2rem;
+    }
+
+    .contact-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-item a {
+      font-size: 0.95rem;
+      color: var(--text);
+      word-break: break-all;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .contact-item a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ------------------------------ */
+    /* REVEAL ANIMATION */
+    /* ------------------------------ */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ------------------------------ */
+    /* FOOTER */
+    /* ------------------------------ */
+
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--border-soft);
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header>
+    <nav class="nav">
+      <div class="nav-left">
+        <div class="nav-logo-circle">GP</div>
+        <span>Giovanna Prezia</span>
+      </div>
+      <div class="nav-right">
+        <a href="#about" data-pt="Início" data-en="Home">Início</a>
+        <a href="#experience" data-pt="Experiência" data-en="Experience">Experiência</a>
+        <a href="#projects" data-pt="Projetos" data-en="Projects">Projetos</a>
+        <a href="#publications" data-pt="Publicações" data-en="Publications">Publicações</a>
+        <a href="#contact" data-pt="Contato" data-en="Contact">Contato</a>
+      </div>
+
+      <div class="language-switcher" aria-label="Language selection">
+        <button id="lang-pt" class="active" type="button">PT</button>
+        <span class="language-divider">|</span>
+        <button id="lang-en" type="button">EN</button>
+      </div>
+
+      <!-- Dark mode button -->
+      <button id="theme-toggle" aria-label="Alternar modo escuro">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero reveal" id="about">
+      <div class="hero-text">
+        <div class="hero-highlight" data-pt="Bioinformática & Análise de Dados" data-en="Bioinformatics & Data Analytics">Bioinformática & Análise de Dados</div>
+        <h1 class="hero-title">Giovanna Prezia</h1>
+        <p class="hero-subtitle" data-pt="CIÊNCIA • DADOS • NARRATIVAS CLARAS" data-en="SCIENCE • DATA • CLEAR NARRATIVES">CIÊNCIA • DADOS • NARRATIVAS CLARAS</p>
+        <p data-pt="Olá! Sou Giovanna, biomédica, bioinformatica e doutoranda, apaixonada por transformar dados complexos em ciência clara. Trabalho com dados científicos e análises aplicadas à saúde e à biotecnologia." data-en="Hi! I’m Giovanna, a biomedical scientist, bioinformatician and PhD student passionate about turning complex data into clear science. I work with scientific data and applied analysis in health and biotechnology.">
+          Olá! Sou Giovanna, biomédica, bioinformatica e doutoranda, apaixonada por transformar dados complexos em ciência clara. Trabalho com dados científicos e análises aplicadas à saúde e à biotecnologia.
+        </p>
+        <p data-pt="Combino bioinformática, ciência de dados e comunicação científica para transformar resultados complexos em histórias visuais, compreensíveis e úteis. Além da pesquisa, produzo conteúdo científico e atuo como consultora em bioinformática. Estou aberta a colaborações, palestras, projetos educacionais e iniciativas de divulgação científica." data-en="I combine bioinformatics, data science and scientific communication to transform complex results into visual, understandable and useful stories. Beyond research, I create scientific content and work as a bioinformatics consultant. I’m open to collaborations, talks, educational projects and scientific outreach initiatives.">
+          Combino bioinformática, ciência de dados e comunicação científica para transformar resultados complexos em histórias visuais, compreensíveis e úteis. Além da pesquisa, produzo conteúdo científico e atuo como consultora em bioinformática. Estou aberta a colaborações, palestras, projetos educacionais e iniciativas de divulgação científica.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">
+            <span data-pt="Ver projetos" data-en="View projects">Ver projetos</span>
+            <i class="fa-solid fa-arrow-down"></i>
+          </a>
+          <a href="#contact" class="btn-ghost">
+            <span data-pt="Entre em contato" data-en="Contact me">Entre em contato</span>
+            <i class="fa-regular fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-photo-wrapper">
+        <div class="hero-photo-frame">
+          <div class="hero-photo">
+            <img src="eu.jpg" alt="Photo of Giovanna Prezia">
+          </div>
+
+          <div class="hero-social">
+            <a href="https://instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://linkedin.com/in/giovannaprezia" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/GiovannaPrezia" target="_blank"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="block reveal" id="experience">
+      <div class="block-label"></div>
+      <h2 class="block-title" data-pt="Experiência" data-en="Experience">Experiência</h2>
+      <p>
+        <span data-pt="Uma visão geral das principais experiências que moldaram minha trajetória em ciência, dados e bioinformática." data-en="A quick overview of the main experiences that have shaped my path in science, data and bioinformatics.">Uma visão geral das principais experiências que moldaram minha trajetória em ciência, dados e bioinformática.</span>
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-role" data-pt="Pesquisadora de Doutorado em Bioinformática" data-en="PhD Researcher in Bioinformatics">Pesquisadora de Doutorado em Bioinformática</div>
+          <div class="timeline-place" data-pt="Fiocruz – Fundação Oswaldo Cruz | Curitiba, Brasil • Fev. 2026 – presente" data-en="Fiocruz – Oswaldo Cruz Foundation | Curitiba, Brazil • Feb 2026 – Present">Fiocruz – Fundação Oswaldo Cruz | Curitiba, Brasil • Fev. 2026 – presente</div>
+          <ul class="timeline-desc-list">
+            <li data-pt="Conduzo pesquisa de doutorado sobre a identificação e caracterização computacional de microproteínas codificadas por RNAs longos não codificantes (lncRNAs) durante a cardiomiogênese" data-en="Conduct doctoral research on the identification and computational characterization of microproteins encoded by long non-coding RNAs (lncRNAs) during cardiomyogenesis">Conduzo pesquisa de doutorado sobre a identificação e caracterização computacional de microproteínas codificadas por RNAs longos não codificantes (lncRNAs) durante a cardiomiogênese</li>
+            <li data-pt="Desenvolvi um workflow de Ribo-seq entre projetos, abrangendo três estudos públicos de diferenciação de cardiomiócitos e sete amostras, incluindo controle de qualidade, alinhamento, quantificação, identificação de ORFs, anotação e filtros de reprodutibilidade" data-en="Built a cross-project Ribo-seq workflow spanning three public cardiomyocyte differentiation studies and seven samples, covering quality control, alignment, quantification, ORF calling, annotation, and reproducibility filtering">Desenvolvi um workflow de Ribo-seq entre projetos, abrangendo três estudos públicos de diferenciação de cardiomiócitos e sete amostras, incluindo controle de qualidade, alinhamento, quantificação, identificação de ORFs, anotação e filtros de reprodutibilidade</li>
+            <li data-pt="Integro evidências de RNA-seq e Ribo-seq para priorizar smORFs associados a lncRNAs e candidatos a microproteínas; realizo análises estatísticas, figuras e relatórios reprodutíveis utilizando R, Python, Bash, Linux, Git e ambientes HPC" data-en="Integrate RNA-seq and Ribo-seq evidence to prioritize lncRNA-associated smORFs and microprotein candidates; generate statistical analyses, figures, and reproducible reports using R, Python, Bash, Linux, Git, and HPC environments">Integro evidências de RNA-seq e Ribo-seq para priorizar smORFs associados a lncRNAs e candidatos a microproteínas; realizo análises estatísticas, figuras e relatórios reprodutíveis utilizando R, Python, Bash, Linux, Git e ambientes HPC</li>
+          </ul>
+        </div>
+
+
+        <div class="timeline-item">
+          <div class="timeline-role" data-pt="Bioinformatica" data-en="Bioinformatician">Bioinformatica</div>
+          <div class="timeline-place" data-pt="Fiotec – Fundação para o Desenvolvimento Científico e Tecnológico | Curitiba, Brasil • Nov. 2024 – Mar. 2026" data-en="Fiotec – Foundation for Scientific and Technological Development | Curitiba, Brazil • Nov 2024 – Mar 2026">Fiotec – Fundação para o Desenvolvimento Científico e Tecnológico | Curitiba, Brasil • Nov. 2024 – Mar. 2026</div>
+          <ul class="timeline-desc-list">
+            <li data-pt="Desenvolvi e otimizei pipelines reprodutíveis de processamento de dados para grandes conjuntos de dados biológicos utilizando Python, R, Bash e Linux" data-en="Developed and optimized reproducible data-processing pipelines for large-scale biological datasets using Python, R, Bash, and Linux">Desenvolvi e otimizei pipelines reprodutíveis de processamento de dados para grandes conjuntos de dados biológicos utilizando Python, R, Bash e Linux</li>
+            <li data-pt="Realizei controle de qualidade, limpeza, transformação, normalização, análises diferenciais e integração de múltiplos conjuntos de dados para identificar padrões biológicos interpretáveis" data-en="Performed quality control, data cleaning, transformation, normalization, differential analysis, and multi-dataset integration to identify interpretable biological patterns">Realizei controle de qualidade, limpeza, transformação, normalização, análises diferenciais e integração de múltiplos conjuntos de dados para identificar padrões biológicos interpretáveis</li>
+            <li data-pt="Criei gráficos de PCA, heatmaps e volcano plots, além de documentação técnica; solucionei problemas em workflows analíticos e entreguei resultados prontos para publicação a equipes multidisciplinares de pesquisa" data-en="Created PCA plots, heatmaps, volcano plots, and technical documentation; troubleshot analytical workflows and delivered publication-ready outputs to multidisciplinary research teams">Criei gráficos de PCA, heatmaps e volcano plots, além de documentação técnica; solucionei problemas em workflows analíticos e entreguei resultados prontos para publicação a equipes multidisciplinares de pesquisa</li>
+          </ul>
+        </div>
+
+
+<div class="timeline-item">
+          <div class="timeline-role" data-pt="Pesquisadora Visitante" data-en="Visiting Researcher">Pesquisadora Visitante</div>
+          <div class="timeline-place">Institut Pasteur de Montevideo, Montevideo/Uruguay • 2025</div>
+          <div class="timeline-desc" data-pt="Desenvolvimento de metodologia para análises de pull-down e imunoprecipitação, integração de dados e otimização de workflows de bioinformática." data-en="Development of methodology for pull-down and immunoprecipitation analyses, data integration and optimization of bioinformatics workflows.">
+            Desenvolvimento de metodologia para análises de pull-down e imunoprecipitação, integração de dados e otimização de workflows de bioinformática.
+          </div>
+        </div> 
+        
+        <div class="timeline-item">
+          <div class="timeline-role" data-pt="Técnica em Desenvolvimento Tecnológico e Dispositivos Médicos" data-en="Technological Development and Medical Devices Technician">Técnica em Desenvolvimento Tecnológico e Dispositivos Médicos</div>
+          <div class="timeline-place">Fiocruz – Carlos Chagas Institute, Paraná/Brazil • 2024</div>
+          <div class="timeline-desc" data-pt="Desenvolvimento de dispositivos médicos, implementação de controle de qualidade interno e criação de pipelines em Python para análise e validação de sinais." data-en="Development of medical devices, implementation of internal quality control and creation of Python-based pipelines for signal analysis and validation.">
+            Desenvolvimento de dispositivos médicos, implementação de controle de qualidade interno e criação de pipelines em Python para análise e validação de sinais.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-role" data-pt="Pós-graduação – Bioinformática Aplicada à Genômica Médica" data-en="Postgraduate – Bioinformatics Applied to Medical Genomics">Pós-graduação – Bioinformática Aplicada à Genômica Médica</div>
+          <div class="timeline-place">Albert Einstein – Israeli Faculty of Health Sciences, São Paulo/Brazil • 2022–2023</div>
+          <div class="timeline-desc" data-pt="Formação em genética molecular, bioinformática e bioestatística, com ênfase na integração de dados genômicos e computacionais aplicados à medicina. Experiência prática com Python, Perl, Galaxy, Snakemake, GATK, VEP, SAMtools e ANNOVAR para análise de dados de NGS." data-en="Training in molecular genetics, bioinformatics and biostatistics, with emphasis on integrating genomic and computational data applied to medicine. Practical experience with Python, Perl, Galaxy, Snakemake, GATK, VEP, SAMtools and ANNOVAR for NGS data analysis.">
+            Formação em genética molecular, bioinformática e bioestatística, com ênfase na integração de dados genômicos e computacionais aplicados à medicina. Experiência prática com Python, Perl, Galaxy, Snakemake, GATK, VEP, SAMtools e ANNOVAR para análise de dados de NGS.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-role" data-pt="Mestrado em Biotecnologia Aplicada à Saúde da Criança e do Adolescente" data-en="M.Sc. in Biotechnology Applied to Child and Adolescent Health">Mestrado em Biotecnologia Aplicada à Saúde da Criança e do Adolescente</div>
+          <div class="timeline-place">Pelé Pequeno Príncipe Research Institute, Paraná/Brazil • 2022–2024</div>
+          <div class="timeline-desc" data-pt="Pesquisa transcriptômica em Leucemia Linfoblástica Aguda (LLA) pediátrica, com ênfase na análise de dados ômicos e interpretação integrativa." data-en="Transcriptomic research in pediatric Acute Lymphoblastic Leukemia (ALL), with emphasis on omics data analysis and integrative interpretation.">
+            Pesquisa transcriptômica em Leucemia Linfoblástica Aguda (LLA) pediátrica, com ênfase na análise de dados ômicos e interpretação integrativa.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="block reveal" id="projects">
+      <div class="block-label"></div>
+      <h2 class="block-title" data-pt="Projetos & Trabalho" data-en="Projects & Work">Projetos & Trabalho</h2>
+      <p>
+        <span data-pt="Alguns exemplos de trabalhos que conectam ciência, dados e comunicação — de análises técnicas a conteúdos educacionais." data-en="A few examples of work that connects science, data and communication — from technical analyses to educational content.">Alguns exemplos de trabalhos que conectam ciência, dados e comunicação — de análises técnicas a conteúdos educacionais.</span>
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-tag" data-pt="Análise de Dados" data-en="Data Analysis">Análise de Dados</div>
+          <div class="card-title" data-pt="Exploração de dados em saúde" data-en="Exploration of health data">Exploração de dados em saúde</div>
+          <p>
+            <span data-pt="Análise exploratória e visualização de conjuntos de dados biomédicos, com foco na identificação de padrões e destaque dos principais insights." data-en="Exploratory analysis and visualization of biomedical datasets, focused on understanding patterns and highlighting key insights.">Análise exploratória e visualização de conjuntos de dados biomédicos, com foco na identificação de padrões e destaque dos principais insights.</span>
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-tag" data-pt="Visualização" data-en="Visualization">Visualização</div>
+          <div class="card-title" data-pt="Dashboards & narrativas visuais" data-en="Dashboards & visual narratives">Dashboards & narrativas visuais</div>
+          <p>
+            <span data-pt="Criação de figuras e dashboards que traduzem resultados complexos em narrativas visuais claras para públicos técnicos e não técnicos." data-en="Design of figures and dashboards that translate complex results into clear visual stories for both technical and non-technical audiences.">Criação de figuras e dashboards que traduzem resultados complexos em narrativas visuais claras para públicos técnicos e não técnicos.</span>
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-tag" data-pt="Educação" data-en="Education">Educação</div>
+          <div class="card-title" data-pt="Conteúdo introdutório" data-en="Introductory content">Conteúdo introdutório</div>
+          <p>
+            <span data-pt="Materiais introdutórios sobre bioinformática, análise de dados e interpretação de resultados, desenvolvidos para estudantes e profissionais das áreas da saúde e ciências da vida." data-en="Introductory material on bioinformatics, data analysis and result interpretation, designed for students and professionals in health and life sciences.">Materiais introdutórios sobre bioinformática, análise de dados e interpretação de resultados, desenvolvidos para estudantes e profissionais das áreas da saúde e ciências da vida.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="block reveal" id="publications">
+      <div class="block-label"></div>
+      <h2 class="block-title" data-pt="Publicações & Apresentações" data-en="Publications & Presentations">Publicações & Apresentações</h2>
+      <p>
+        <span data-pt="Trabalhos selecionados que refletem minha experiência em pesquisa, bioinformática e comunicação científica." data-en="Selected works that reflect my experience in research, bioinformatics and scientific communication.">Trabalhos selecionados que refletem minha experiência em pesquisa, bioinformática e comunicação científica.</span>
+      </p>
+
+      <div class="pub-list">
+
+        <!-- Gene 2025 article -->
+        <div class="pub-item">
+          <strong>
+            The widespread misuse of StringTie's gene identifier tags as de facto gene symbols 
+            does not allow consistent gene identification in published research
+          </strong><br>
+          Oliveira, L.A., Kretzschmar, G.C., Lobo-Alves, S.C., <strong>Prezia, G.N.B.</strong>, Bispo, S., Rosati, R.  
+          <em>Gene</em>, Elsevier, 2025.<br>
+          🔗 <a href="https://doi.org/10.1016/j.gene.2025.149440" target="_blank">View DOI</a>
+        </div>
+
+        <!-- Frontiers in Genetics 2022 article -->
+        <div class="pub-item">
+          <strong>
+            New Insights on the Regulatory Gene Network Disturbed in Central Areolar Choroidal
+            Dystrophy — Beyond Classical Gene Candidates
+          </strong><br>
+          Camargo, J.P.K., <strong>Prezia, G.N.B.</strong>, Shiokawa, N., Sato, M.T., Rosati, R., Boldt, A.B.W.  
+          <em>Frontiers in Genetics</em>, 2022.<br>
+          🔗 <a href="https://doi.org/10.3389/fgene.2022.886461" target="_blank">View DOI</a>
+        </div>
+
+        <!-- Congress presentation 2024 -->
+        <div class="pub-item">
+          <strong>
+            Compound WFS1 heterozygosity is responsible for a new wolframinopathy
+          </strong><br>
+          Presentation at the 68th Brazilian Congress of Genetics (SBG), Ribeirão Preto, 2024.<br>
+          🎓 <a href="certificado_wfs1.png" target="_blank">View certificate</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="block reveal" id="skills">
+      <div class="block-label"></div>
+      <h2 class="block-title" data-pt="Habilidades & Ferramentas" data-en="Skills & Tools">Habilidades & Ferramentas</h2>
+      <p>
+        <span data-pt="Ferramentas, linguagens e metodologias que utilizo para análise de dados, pesquisa e comunicação científica." data-en="Tools, languages and methodologies I use for data analysis, research and scientific communication.">Ferramentas, linguagens e metodologias que utilizo para análise de dados, pesquisa e comunicação científica.</span>
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-tag" data-pt="Programação" data-en="Programming">Programação</div>
+          <div class="card-title">Python • R • SQL</div>
+          <p data-pt="Análise de dados, desenvolvimento de scripts de bioinformática e manipulação de grandes conjuntos de dados." data-en="Data analysis, bioinformatics scripting and handling of large datasets.">Análise de dados, desenvolvimento de scripts de bioinformática e manipulação de grandes conjuntos de dados.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-tag" data-pt="Bioinformática" data-en="Bioinformatics">Bioinformática</div>
+          <div class="card-title">NGS • Omics • Genomics</div>
+          <p data-pt="Pipelines, alinhamento, análise de expressão e interpretação de dados biológicos." data-en="Pipelines, alignment, expression analysis and biological data interpretation.">Pipelines, alinhamento, análise de expressão e interpretação de dados biológicos.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-tag">Visualization</div>
+          <div class="card-title">Matplotlib • ggplot2 • Tableau</div>
+          <p data-pt="Gráficos cientificamente precisos e dashboards interativos para comunicação de dados." data-en="Scientifically accurate plots and interactive dashboards for data storytelling.">Gráficos cientificamente precisos e dashboards interativos para comunicação de dados.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-tag" data-pt="Ferramentas" data-en="Tools">Ferramentas</div>
+          <div class="card-title">Git • Linux • Jupyter • VS Code</div>
+          <p data-pt="Workflows reprodutíveis, controle de versão e ambiente moderno de desenvolvimento." data-en="Reproducible workflows, version control and modern development environment.">Workflows reprodutíveis, controle de versão e ambiente moderno de desenvolvimento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="block reveal" id="contact">
+      <div class="block-label"></div>
+      <h2 class="block-title" data-pt="Contato" data-en="Contact">Contato</h2>
+      <p>
+        <span data-pt="Aberta a colaborações, consultorias, projetos educacionais e oportunidades remotas em ciência, dados e saúde." data-en="Open to collaborations, consulting, educational projects and remote opportunities in science, data and health.">Aberta a colaborações, consultorias, projetos educacionais e oportunidades remotas em ciência, dados e saúde.</span>
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label" data-pt="E-mail" data-en="Email">E-mail</div>
+          <a href="mailto:giovannaprezia.analytics@gmail.com">giovannaprezia.analytics@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/giovannaprezia" target="_blank">
+            linkedin.com/in/giovannaprezia
+          </a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">GitHub</div>
+          <a href="https://github.com/GiovannaPrezia" target="_blank">
+            github.com/GiovannaPrezia
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © <span id="year"></span> Giovanna Prezia — <span data-pt="Bioinformática & Análise de Dados" data-en="Bioinformatics & Data Analytics">Bioinformática & Análise de Dados</span>
+  </footer>
+
+  <!-- ------------------------------ -->
+  <!-- SCRIPTS: Dark Mode + Animations -->
+  <!-- ------------------------------ -->
+  <script>
+
+    /* Footer year */
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    /* Reveal animation */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    /* LANGUAGE SWITCHER */
+    const languageButtons = {
+      pt: document.getElementById("lang-pt"),
+      en: document.getElementById("lang-en")
+    };
+
+    function setLanguage(language) {
+      document.documentElement.lang = language === "pt" ? "pt-BR" : "en";
+
+      document.querySelectorAll("[data-pt][data-en]").forEach(element => {
+        element.textContent = element.dataset[language];
+      });
+
+      languageButtons.pt.classList.toggle("active", language === "pt");
+      languageButtons.en.classList.toggle("active", language === "en");
+
+      languageButtons.pt.setAttribute("aria-pressed", language === "pt");
+      languageButtons.en.setAttribute("aria-pressed", language === "en");
+
+      localStorage.setItem("language", language);
+    }
+
+    languageButtons.pt.addEventListener("click", () => setLanguage("pt"));
+    languageButtons.en.addEventListener("click", () => setLanguage("en"));
+
+    const savedLanguage = localStorage.getItem("language") || "pt";
+    setLanguage(savedLanguage);
+
+    /* DARK MODE */
+    const toggle = document.getElementById("theme-toggle");
+    const body = document.body;
+
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+      body.classList.add("dark");
+      toggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+
+    // Toggle theme on click
+    toggle.addEventListener("click", () => {
+      body.classList.toggle("dark");
+
+      if (body.classList.contains("dark")) {
+        toggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        localStorage.setItem("theme", "dark");
+      } else {
+        toggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        localStorage.setItem("theme", "light");
+      }
+    });
+
+  </script>
+
+</body>
+</html>
